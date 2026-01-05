@@ -1,14 +1,18 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
 
-def get_chat_chain(llm):
+def get_rag_chain(llm):
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", "You are a helpful AI assistant."),
+            (
+                "system",
+                "You are a helpful assistant. "
+                "Answer ONLY using the provided context. "
+                "If the answer is not in the context, say you don't know."
+            ),
             MessagesPlaceholder(variable_name="history"),
-            ("human", "{question}"),
+            ("human", "Context:\n{context}\n\nQuestion:\n{question}")
         ]
     )
 
-    chain = prompt | llm | StrOutputParser()
-    return chain
+    return prompt | llm | StrOutputParser()

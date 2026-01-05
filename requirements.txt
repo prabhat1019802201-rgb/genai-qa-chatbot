@@ -5,4 +5,10 @@ langchain-openai
 python-dotenv
 langchain-groq
 langsmith
+pypdf
+faiss-cpu
+transformers 
+accelerate 
+torch 
+sentence-transformers
 
